@@ -15,18 +15,19 @@ FORM.addEventListener("submit",(event) => {
     callAPI(VILLES);
 });
 
-async function callAPI(Ville) {
+function callAPI(Ville){
     const Url_API_Meteo = `http://api.openweathermap.org/data/2.5/weather?q=${Ville}&units=metric&lang=fr&appid=${API_Key_Meteo}`;
     console.log(Url_API_Meteo);
-    
-    const reponse = await fetch(Url_API_Meteo);
-    const info = await reponse.json();
-    Info = info;
+    fetch(Url_API_Meteo)
+    .then(reponse => reponse.json())
+    .then(info => {
 
-    TEMP.innerHTML = Math.round(info.main.temp) + "°C";
-    VILLE.innerHTML = info.name;
-    PAYS.innerHTML = info.sys.country;
-    DESC.innerHTML = info.weather[0].description;
 
-    console.log(Info);
+        console.log(info);
+        Info = info;
+        TEMP.innerHTML= Math.round(info.main.temp)+"°C";
+        VILLE.innerHTML= info.name;
+        PAYS.innerHTML= info.sys.country;
+        DESC.innerHTML= info.weather[0].description;
+    })
 }
