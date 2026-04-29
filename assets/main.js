@@ -17,13 +17,9 @@ FORM.addEventListener("submit",(event) => {
 
 function callAPI(Ville){
     const Url_API_Meteo = `http://api.openweathermap.org/data/2.5/weather?q=${Ville}&units=metric&lang=fr&appid=${API_Key_Meteo}`;
-    console.log(Url_API_Meteo);
     fetch(Url_API_Meteo)
     .then(reponse => reponse.json())
     .then(info => {
-
-
-        console.log(info);
         Info = info;
         TEMP.innerHTML= Math.round(info.main.temp)+"°C";
         VILLE.innerHTML= info.name;
